@@ -10,9 +10,8 @@ import SimplyCoreAudio
 import CoreAudio
 import AudioToolbox
 let loopback_name =  "IXIMega Device"
-let m2_output_name =  "IXI Mega M2 Plus"
 let m2_input_name =  "Built-in Microphone"
-//let m2_output_name = "Built-in Output"
+let m2_output_name = "Built-in Output"
 
 class ViewController: NSViewController {
     var buffer: CircularBuffer<Int32>?
@@ -85,22 +84,6 @@ class ViewController: NSViewController {
         checkErr(inputUnit!.getPropertyStreamFormat(&streamFormat,.output,1))
         streamFormat.mChannelsPerFrame = loopDevice!.channels(scope: .output)
 
-        
-        /**
-         //设置首选的channel
-         let channels =  StereoPair(3,4)
-         M2OutDevice?.setPreferredChannelsForStereo(channels: channels, scope: .output)
-         //获取首选的channel
-         if let stereoPair = M2OutDevice!.preferredChannelsForStereo(scope: .output) {
-             print(stereoPair)
-         }
-         //获取声道channel的名称
-         M2OutDevice?.name(channel: 1, scope: .output)
-         //获取设备有几个声道channel
-         M2OutDevice?.channels(scope: .output)
-         //获取设备有几个layoutChanne
-         M2OutDevice?.layoutChannels(scope: .output)
-         */
         
         var deviceFormat = AudioStreamBasicDescription()
         checkErr(inputUnit!.getPropertyStreamFormat(&deviceFormat, .input, 1))
